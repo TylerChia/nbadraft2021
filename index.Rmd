@@ -39,7 +39,7 @@ The main goal of this project was to use preexisting data from previous NBA draf
 
 In terms of my processes, I used various machine learning algorithms that I learned in my recent machine learning class as a way to choose a model that would best predict the outcome of the draft.  Some of the models that I used include logistic regression, discriminant analysis, and random forest models.  The plan was to use college statistics as a way to predict who would get drafted.  For this project I decided to use the 2018-2019 NCAA season statistics as well as the 2019 draft in order to build my models due to the fact that this was the last normal college season before the COVID-19 pandemic where much of the following season was cut short.  
 
-As context, it is extremely difficult to be drafted to the NBA even after playing division 1 basketball in college.  According to [this website](https://www.ncaa.org/about/resources/research/mens-basketball-probability-competing-beyond-high-school), only 3.5% of all high school players become NCAA players.  This leaves 18,816 total NCAA participants.  Slimming the numbers down even further, only 1% of all high school players play at a Division 1 level of NCAA basketball.  Furthermore, in 2019 only 4181 of the 18,816 NCAA players were even eligible for the NBA draft which selects a total of 60 players, not all of which come from NCAA basketball.  So out of the 4181 draft eligible NCAA players, only 52 were drafting leaving us with a 1.2% NCAA to NBA percentage.
+As context, it is extremely difficult to be drafted to the NBA even after playing division 1 basketball in college.  According to [this website](https://www.ncaa.org/about/resources/research/mens-basketball-probability-competing-beyond-high-school), only 3.5% of all high school players become NCAA players.  This leaves 18,816 total NCAA participants.  Slimming the numbers down even further, only 1% of all high school players play at a Division 1 level of NCAA basketball.  Furthermore, in 2019 only 4181 of the 18,816 NCAA players were even eligible for the NBA draft which selects a total of 60 players, not all of which come from NCAA basketball.  So out of the 4181 draft eligible NCAA players, only 52 were drafted leaving us with a 1.2% NCAA to NBA percentage.
 
 *******
 
@@ -47,7 +47,7 @@ As context, it is extremely difficult to be drafted to the NBA even after playin
 
 The first major contingency that we come across while planning this project is the fact that not every player that gets drafted to the NBA plays NCAA basketball.  There are several players that get drafted each year that come from outside the United States.  In the 2019 draft, 7 were drafted as international players.  On average since 2009, 11 international players have been drafted each year.  However, for the sake of this project and convenience for myself, I will only be considering NCAA basketball players as the point of this project is to be able to predict who gets drafted from the NCAA based on their stats.
 
-The second contingency that we come across is the fact that it would be way too difficult for me to compile a dataset of every single NCAA player and their statistics from the 2018-2019 season as there were over 18,000 NCAA participants that year.  As a way to solve this issue, I slimmed down the dataset to only Division 1 participants as 4.2% of all draft eligible Division 1 players were chosen in that years draft.  Furthermore, I cut the data even further down to only players from the five D1 conferences with autonomous governance.  As a way to explain the conferences with autonomous governance, these five conferences only make up 18% of all D1 colleges but have nearly 40% of the voting power as well as the fact that they have the most wealthy programs.  Even with only Division 1 players, the dataset was still too large.  Cutting it down to the 5 conferences with autonomous governance meant restricting the data to only players from the ACC, Big Ten, Big 12, Pac-12, and SEC.  This helps a lot as 18% of draft eligible players from these conferences were drafted in the 2019 NBA Draft.  41 of the 60 draft spots were occupied by a player from one of these five Division 1 conferences.  My final dataset contains 901 players with 40 of them labeled as drafted to the NBA.  It would be 41 but Dewan Hernandez who was drafted to the NBA out of a top 5 conference with autonomous governance, took a gap year before entering the draft.  Therefore, he did not have any statistics from the 2018-2019 season.  
+The second contingency that we come across is the fact that it would be way too difficult for me to compile a dataset of every single NCAA player and their statistics from the 2018-2019 season as there were over 18,000 NCAA participants that year.  As a way to solve this issue, I slimmed down the dataset to only Division 1 participants as 4.2% of all draft eligible Division 1 players were chosen in that year's draft.  Furthermore, I cut the data even further down to only players from the five D1 conferences with autonomous governance.  As a way to explain the conferences with autonomous governance, these five conferences only make up 18% of all D1 colleges but have nearly 40% of the voting power as well as the fact that they have the most wealthy programs.  Even with only Division 1 players, the dataset was still too large.  Cutting it down to the 5 conferences with autonomous governance meant restricting the data to only players from the ACC, Big Ten, Big 12, Pac-12, and SEC.  This helps a lot as 18% of draft eligible players from these conferences were drafted in the 2019 NBA Draft.  41 of the 60 draft spots were occupied by a player from one of these five Division 1 conferences.  My final dataset contains 901 players with 40 of them labeled as drafted to the NBA.  It would be 41 but Dewan Hernandez who was drafted to the NBA out of a top 5 conference with autonomous governance, took a gap year before entering the draft.  Therefore, he did not have any statistics from the 2018-2019 season.  
 
 The third contingency from the data is that I could not find a list of the players who were draft eligible so I ended up using all the players from the 5 conferences with autonomous governance.  The models probably would have been better had I used only draft eligible players' statistics.
 
@@ -55,26 +55,26 @@ Lastly, I have come to the realization that many of the players that are likely 
 
 The stats that I am using to predict whether a player will get drafted or not include:
 
-- Games played
-- Minutes per game
-- Field goal makes
-- Field goal attempts
-- Field goal percentage
-- 3 point makes
-- 3 point attempts
-- 3 point percentage
-- Free throw makes
-- Free throw attempts
-- Free throw percentage
-- Turn overs per game
-- Personal Fouls per game
-- Offensive rebounds per game
-- Defensive rebounds per game
-- Rebounds per game
-- Assists per game
-- Steals per game
-- Blocks per game
-- Points per game
+- Games Played
+- Minutes Per Game
+- Field Goal Makes
+- Field Goal Attempts
+- Field Goal Percentage
+- 3 Point Makes
+- 3 Point Attempts
+- 3 Point Percentage
+- Free Throw Makes
+- Free Throw Attempts
+- Free Throw Percentage
+- Turn Overs Per Game
+- Personal Fouls Per Game
+- Offensive Rebounds Per Game
+- Defensive Rebounds Per Game
+- Rebounds Per Game
+- Assists Per Game
+- Steals Per Game
+- Blocks Per Game
+- Points Per Game
 
 Below contains a clip of the dataset before cleaning.
 ```{r, include=TRUE, echo=F}
@@ -108,7 +108,7 @@ data2[1:5, 1:8] %>%
 
 # Methods
 
-As for methods, the goal was to just use different classification methods and decide which one would be most effective in determining which players from the top 5 conferences would get drafted.  I would then use the chosen model on 2020-2021 players statistics as a way to see who will get drafted to the NBA on July 29, 2021 which is the date of this year's draft.  As stated before, the three methods that I will be using are logistic regression, linear discriminant analysis, and a random forest model.  In addition, for all three classification models, I used a 40-60 test/train split.  This means that 60% of my original dataset was used as a training set to build the model and 40% of the dataset was used to test the models' accuracy.
+As for methods, the goal was to use different classification methods and decide which one would be most effective in determining which players from the top 5 conferences would get drafted.  I would then use the chosen model on 2020-2021 players statistics as a way to see who will get drafted to the NBA on July 29, 2021 which is the date of this year's draft.  As stated before, the three methods that I will be using are logistic regression, linear discriminant analysis, and a random forest model.  In addition, for all three classification models, I used a 40-60 test/train split.  This means that 60% of my original dataset was used as a training set to build the model and 40% of the dataset was used to test the models' accuracy.
 
 *******
 
@@ -234,7 +234,7 @@ rates_lda %>%
   geom_point(data = optimal_thresh_lda, aes(x = fpr, y = tpr), color = "red", size = 2)
 ```
 
-Using this optimal threshold, I redid the linear discriminant analysis model and found that its overall accuracy rate is only about 80% and the true negative rate is about 79%.  However, with this drastic decrease in accuracy rates, the true negative rate jumped all they way to 93% as it correctly classified 14 out of the 15 drafted players.  Looking at the counts though, we are able to see that the model incorrectly classified 72 players as "drafted" who were not drafted.  Therefore, we can determine that this model is not viable.  Even though we have a high true negative rate, the model severely overestimates the number of players that get drafted.
+Using this optimal threshold, I redid the linear discriminant analysis model and found that its overall accuracy rate is only about 80% and the true negative rate is about 79%.  However, with this drastic decrease in accuracy rates, the true positive rate jumped all they way to 93% as it correctly classified 14 out of the 15 drafted players.  Looking at the counts though, we are able to see that the model incorrectly classified 72 players as "drafted" who were not drafted.  Therefore, we can determine that this model is not viable.  Even though we have a high true positive rate, the model severely overestimates the number of players that get drafted.
 
 ```{r, include=TRUE}
 # convert to classes using optimal probability threshold
@@ -285,9 +285,9 @@ mean(test$DRAFT == pred_rf)
 
 # Results
 
-In terms of deciding which model to utilize in order to predict the 2021 NBA draft, we run into the classic issue of give-and-take when it comes to overall accuracy and true negative accuracy.  In the end, I decided to use the logistic regression model with the optimal threshold as it yielded the results that I felt were best for this project.  This specific model allowed me to have both a relatively high overall prediction accuracy while keeping the true positive rate relatively high as well.  Having an 80% true positive rate in my opinion is pretty good considering just how few players get drafted to the NBA out of all the players within the dataset.  
+In terms of deciding which model to utilize in order to predict the 2021 NBA draft, we run into the classic issue of give-and-take when it comes to overall accuracy and true positive accuracy.  In the end, I decided to use the logistic regression model with the optimal threshold as it yielded the results that I felt were best for this project.  This specific model allowed me to have both a relatively high overall prediction accuracy while keeping the true positive rate relatively high as well.  Having an 80% true positive rate in my opinion is pretty good considering just how few players get drafted to the NBA out of all the players within the dataset.  
 
-In order to use this model to predict the 2021 NBA draft, I had to pull the statistics for every player in the top 5 conferences with autonomous governance from the 2020-2021 season.  In the end, the new test dataset for this years college players ended up with 982 players.  I then ran the model on this new dataset and the model predicts that the 37 players listed below will be drafted in the 2021 NBA draft.
+In order to use this model to predict the 2021 NBA draft, I had to pull the statistics for every player in the top 5 conferences with autonomous governance from the 2020-2021 season.  In the end, the new test dataset for this year's college players ended up with 982 players.  I then ran the model on this new dataset and the model predicts that the 37 players listed below will be drafted in the 2021 NBA draft.
 
 ```{r}
 data3 <- read_csv("NCAA D1 Autonomous - Sheet3.csv")
