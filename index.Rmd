@@ -1,5 +1,5 @@
 ---
-title: "Predicting the 2021 NBA Draft"
+title: "Predicting The 2021 NBA Draft"
 author: "Tyler Chia"
 output:
   html_document:
@@ -250,7 +250,7 @@ mean(test$DRAFT == lda_preds_adj)
 
 *******
 
-# Random Forest
+## Random Forest
 
 The last classification model that I decided to implement for this project was a random forest model.  After building the model, I created an importance table as a way to determine which variables were the most important in terms of dividing the tree.  As seen below, PPG, FGM, FTM, MPG, and FGA were the most important variables in terms of splitting the trees.
 
@@ -285,7 +285,9 @@ mean(test$DRAFT == pred_rf)
 
 # Results
 
-In terms of deciding which model to utilize in order to predict the 2021 NBA draft, we run into the classic issue of give-and-take when it comes to overall accuracy and true negative accuracy.  
+In terms of deciding which model to utilize in order to predict the 2021 NBA draft, we run into the classic issue of give-and-take when it comes to overall accuracy and true negative accuracy.  In the end, I decided to use the logistic regression model with the optimal threshold as it yielded the results that I felt were best for this project.  This specific model allowed me to have both a relatively high overall prediction accuracy while keeping the true positive rate relatively high as well.  Having an 80% true positive rate in my opinion is pretty good considering just how few players get drafted to the NBA out of all the players within the dataset.  
+
+In order to use this model to predict the 2021 NBA draft, I had to pull the statistics for every player in the top 5 conferences with autonomous governance from the 2020-2021 season.  In the end, the new test dataset for this years college players ended up with 982 players.  I then ran the model on this new dataset and the model predicts that the 37 players listed below will be drafted in the 2021 NBA draft.
 
 ```{r}
 data3 <- read_csv("NCAA D1 Autonomous - Sheet3.csv")
@@ -310,6 +312,17 @@ data3$DRAFT = y_hat_glm_final
 data5 = data3 %>% 
   filter(DRAFT == 1)
 
+data5 = data5 %>% 
+  rename(
+    FG_PER = "FG%",
+    "Three_P_PER" = "3P%",
+    "Three_P_A" = "3PA",
+    "FT_PER" = "FT%"
+  )
+
+data5 = data5 %>% 
+  select(Player, Team, GP, MPG, FG_PER, Three_P_PER, RPG, APG, SPG, BPG, PPG)
+
 DT::datatable(data5)
 ```
 
@@ -317,6 +330,18 @@ DT::datatable(data5)
 *******
 
 # Discussion
+
+There are many things to keep in mind when viewing this project due to the number of contingencies that allowed the project to be easier for me to perform.  Much of this should be taken with a grain of salt.  To recap, the results of this project relies on the understanding that:
+
+1. The players predicted to be drafted must have played in the most recent NCAA basketball season and are not currently in the G-League.
+2. The players predicted to be drafted must have played Division 1 basketball in the most recent NCAA basketball season.
+3. The players predicted to be drafted must have played in one of the 5 conferences with autonomous governance (ACC, Big 10, Big 12, Pac-12, SEC)
+4. Not all the players in my dataset are draft-eligible.
+5. Players predicted to be drafted may have not even entered the draft.
+
+I was taking a closer look at the 37 players who are predicted to be drafted by my model and there seems to be some level of accuracy to it as Cade Cunningham and Evan Mobley are both on this list and are projected to be top 5 picks in the 2021 NBA draft by ESPN.  However, as stated before, there are players on this list that are not even entered in the draft such as Johnny Juzang who already stated that he will be returning to UCLA to play another season.  Also as stated before, this project would probably have been more accurate had I been looking solely at players who were draft-eligible instead of every single player within the top 5 conferences with autonomous governance.
+
+Overall, this was a fun project to perform as a way to test my skills even though the results may not be completely accurate.  I will be revisiting this project after July 29th which is the day of the draft in order to see how accurate my model was in predicting who would be drafted in the 2021 NBA Draft.
 
 *******
 
@@ -327,6 +352,7 @@ DT::datatable(data5)
 - https://www.ncaa.org/about/resources/research/mens-basketball-probability-competing-beyond-high-school
 - https://basketball.realgm.com/ncaa/conferences/Southeastern-Conference/8/stats/2021/Averages/All/All/Season/All/points/desc/1/
 - https://en.wikipedia.org/wiki/Power_Five_conferences
+- https://www.espn.com/nba/draft/bestavailable/_/position/ovr/page/1
 
 *******
 
