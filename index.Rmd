@@ -322,8 +322,18 @@ data5 = data5 %>%
 
 data5 = data5 %>% 
   select(Player, Team, GP, MPG, FG_PER, Three_P_PER, RPG, APG, SPG, BPG, PPG)
+data5$DRAFT = c(0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,1,1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0)
 
-DT::datatable(data5)
+datatable(data5) %>% formatStyle(
+  'DRAFT', target = 'row', 
+  backgroundColor = styleEqual(c(1), c('yellow'))
+)
+
+data5 %>% 
+  group_by(DRAFT) %>% 
+  count()
+
+8/37
 ```
 
 
@@ -342,6 +352,10 @@ There are many things to keep in mind when viewing this project due to the numbe
 I was taking a closer look at the 37 players who are predicted to be drafted by my model and there seems to be some level of accuracy to it as Cade Cunningham and Evan Mobley are both on this list and are projected to be top 5 picks in the 2021 NBA draft by ESPN.  However, as stated before, there are players on this list that are not even entered in the draft such as Johnny Juzang who already stated that he will be returning to UCLA to play another season.  Also as stated before, this project would probably have been more accurate had I been looking solely at players who were draft-eligible instead of every single player within the top 5 conferences with autonomous governance.
 
 Overall, this was a fun project to perform as a way to test my skills even though the results may not be completely accurate.  I will be revisiting this project after July 29th which is the day of the draft in order to see how accurate my model was in predicting who would be drafted in the 2021 NBA Draft.
+
+Edit (Post July 29, 2021):
+
+Though it has been awhile, I have finally gotten around to looking at the results of my model.  After comparing the players that I predicted to get drafted to the players who actually got drafted in the 2021 NBA Draft, I realize that my model did not perform too well.  Out of the 37 players that my model predicted to be drafted, only 8 of them were actually drafted leaving us with a 21.6% accuracy rate which is not too high.  With that being said, there 10 players who I predicted to be drafted who went undrafted but eventually signed with NBA G-League teams or are currently on an NBA roster.  Overall, though my model did not perform as well as I would have liked it to, I still believe it performed to the best of its ability considering all the contingencies surrounding this project.  Many of the players that I predicted to be drafted actually ended up not even entering the draft and stayed at their respective schools.  In the datatable above, I have highlighted the players that were offically drafted by NBA teams in the 2021 draft.
 
 *******
 
